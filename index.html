@@ -1,812 +1,454 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Full Digital Media & Grammar Quiz</title>
-
+<title>Full Educational Quiz - 58 Questions</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 15px;
-    background: linear-gradient(135deg, #0f2027, #2c5364, #00c6ff);
-    direction: ltr;
-}
-
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding-bottom: 80px;
-}
-
-#scoreBox {
-    background: linear-gradient(135deg, #0072ff, #00c6ff);
-    color: white;
-    padding: 15px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 20px;
-    position: sticky;
-    top: 10px;
-    z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-.question {
-    background: white;
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 15px;
-    font-size: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.question p {
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-.btn-option {
-    width: 100%;
-    padding: 12px;
-    margin: 5px 0;
-    border: 2px solid #eee;
-    border-radius: 10px;
-    background: white;
-    color: #333;
-    text-align: left;
-    transition: 0.2s;
-    font-size: 15px;
-}
-
-.btn-option:hover {
-    background: #f0f8ff;
-    cursor: pointer;
-    border-color: #00c6ff;
-}
-
-.translate-btn {
-    background: #6c757d;
-    color: white;
-    border: none;
-    padding: 5px 12px;
-    border-radius: 5px;
-    font-size: 12px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-.translation-text {
-    display: none;
-    background: #f9f9f9;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #555;
-    border-right: 4px solid #00c6ff;
-    direction: rtl;
-    text-align: right;
-}
-
-.correct { background: linear-gradient(135deg, #00b09b, #96c93d) !important; color: white !important; border: none; }
-.wrong { background: linear-gradient(135deg, #ff416c, #ff4b2b) !important; color: white !important; border: none; }
-
-.result { margin-top: 10px; font-weight: bold; }
-
-h3 { color: white; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px; margin-top: 40px; }
-
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(135deg, #0072ff, #00c6ff);
-    color: white;
-    text-align: center;
-    padding: 12px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-.footer a { text-decoration: none; color: white; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 15px; background: #f0f2f5; direction: ltr; }
+    .container { max-width: 800px; margin: auto; padding-bottom: 100px; }
+    #scoreBox { background: #1a73e8; color: white; padding: 15px; border-radius: 12px; text-align: center; font-size: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    .question-card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .q-text { font-size: 18px; font-weight: 600; color: #1c1e21; margin-bottom: 15px; }
+    .translate-btn { background: #34a853; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; margin-bottom: 10px; }
+    .translation-area { display: none; background: #e8f5e9; padding: 10px; border-radius: 8px; margin-bottom: 15px; direction: rtl; text-align: right; border-right: 4px solid #34a853; }
+    .option { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #dadce0; border-radius: 8px; background: #fff; text-align: left; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; }
+    .option:hover { background: #f8f9fa; border-color: #1a73e8; }
+    .ar-opt { display: none; font-size: 14px; color: #5f6368; margin-top: 4px; direction: rtl; text-align: right; }
+    .correct { background: #d4edda !important; border-color: #28a745 !important; }
+    .wrong { background: #f8d7da !important; border-color: #dc3545 !important; }
+    .result-msg { margin-top: 15px; font-weight: bold; direction: rtl; text-align: right; }
+    h2 { text-align: center; color: #1a73e8; }
+    .footer { position: fixed; bottom: 0; left: 0; width: 100%; background: white; padding: 15px; text-align: center; border-top: 1px solid #ddd; font-weight: bold; }
+    .footer a { color: #e1306c; text-decoration: none; }
 </style>
 </head>
-
 <body>
+
 <div class="container">
-
-<div id="scoreBox">Score: 0 / 60</div>
-
-<h3>Section 1: Digital Media in the Modern Era (Reading)</h3>
-
-<div class="question" data-ar="أي عبارة تصف بشكل أفضل دور الإعلام الرقمي في العصر الحديث؟">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">أي عبارة تصف بشكل أفضل دور الإعلام الرقمي في العصر الحديث؟</div>
-    <p>1. Which statement best describes the role of digital media in the modern era?</p>
-    <button class="btn-option" onclick="check(this,false)">A. It is used only for entertainment</button>
-    <button class="btn-option" onclick="check(this,false)">B. It replaces all traditional media completely</button>
-    <button class="btn-option" onclick="check(this,true)">C. It affects education, business, and communication</button>
-    <button class="btn-option" onclick="check(this,false)">D. It is limited to young people only</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="لماذا يعتبر الإعلام الرقمي أكثر فاعلية من الإعلام التقليدي اليوم؟">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">لماذا يعتبر الإعلام الرقمي أكثر فاعلية من الإعلام التقليدي اليوم؟</div>
-    <p>2. Why is digital media considered more effective than traditional media today?</p>
-    <button class="btn-option" onclick="check(this,false)">A. Because it depends on printing</button>
-    <button class="btn-option" onclick="check(this,false)">B. Because it is slower</button>
-    <button class="btn-option" onclick="check(this,true)">C. Because it allows fast and interactive communication</button>
-    <button class="btn-option" onclick="check(this,false)">D. Because it does not use technology</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="أحد السلبيات الرئيسية للإعلام الرقمي المذكورة في النص هي:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">أحد السلبيات الرئيسية للإعلام الرقمي المذكورة في النص هي:</div>
-    <p>3. One major disadvantage of digital media mentioned in the text is:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Lack of information</button>
-    <button class="btn-option" onclick="check(this,false)">B. High cost</button>
-    <button class="btn-option" onclick="check(this,true)">C. Privacy problems and fake news</button>
-    <button class="btn-option" onclick="check(this,false)">D. Limited audience</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="تستخدم الشركات الإعلام الرقمي بشكل أساسي لأنه:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">تستخدم الشركات الإعلام الرقمي بشكل أساسي لأنه:</div>
-    <p>4. Companies use digital media mainly because it:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Is difficult to use</button>
-    <button class="btn-option" onclick="check(this,false)">B. Is expensive</button>
-    <button class="btn-option" onclick="check(this,true)">C. Reaches a global audience</button>
-    <button class="btn-option" onclick="check(this,false)">D. Is only for students</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="ما هي الفكرة الرئيسية للنص؟">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">ما هي الفكرة الرئيسية للنص؟</div>
-    <p>5. What is the main idea of the passage?</p>
-    <button class="btn-option" onclick="check(this,false)">A. Digital media is dangerous and should not be used</button>
-    <button class="btn-option" onclick="check(this,false)">B. Digital media is only useful for entertainment</button>
-    <button class="btn-option" onclick="check(this,true)">C. Digital media has both advantages and disadvantages in modern life</button>
-    <button class="btn-option" onclick="check(this,false)">D. Digital media is the same as traditional media</button>
-    <div class="result"></div>
-</div>
-
-<h3>Section 2: Digital Media Full Exam</h3>
-
-<div class="question" data-ar="يعمل الإعلام الرقمي من خلال:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">يعمل الإعلام الرقمي من خلال:</div>
-    <p>6. Digital media works through the:</p>
-    <button class="btn-option" onclick="check(this,true)">A. Internet</button>
-    <button class="btn-option" onclick="check(this,false)">B. Paper</button>
-    <button class="btn-option" onclick="check(this,false)">C. Books</button>
-    <button class="btn-option" onclick="check(this,false)">D. Radio</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="أي من هذه هو إعلام رقمي؟">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">أي من هذه هو إعلام رقمي؟</div>
-    <p>7. Which one is digital media?</p>
-    <button class="btn-option" onclick="check(this,false)">A. Newspaper</button>
-    <button class="btn-option" onclick="check(this,false)">B. Magazine</button>
-    <button class="btn-option" onclick="check(this,true)">C. Facebook</button>
-    <button class="btn-option" onclick="check(this,false)">D. Radio</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="يوتيوب هو مثال على:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">يوتيوب هو مثال على:</div>
-    <p>8. YouTube is an example of:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Print media</button>
-    <button class="btn-option" onclick="check(this,true)">B. Digital media</button>
-    <button class="btn-option" onclick="check(this,false)">C. Radio media</button>
-    <button class="btn-option" onclick="check(this,false)">D. Outdoor media</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="يمكن أن يشمل الإعلام الرقمي:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">يمكن أن يشمل الإعلام الرقمي:</div>
-    <p>9. Digital media can include:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Text only</button>
-    <button class="btn-option" onclick="check(this,false)">B. Images only</button>
-    <button class="btn-option" onclick="check(this,false)">C. Videos only</button>
-    <button class="btn-option" onclick="check(this,true)">D. All of the above</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="يستخدم الناس الإعلام الرقمي لـ:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">يستخدم الناس الإعلام الرقمي لـ:</div>
-    <p>10. People use digital media to:</p>
-    <button class="btn-option" onclick="check(this,true)">A. Share information</button>
-    <button class="btn-option" onclick="check(this,false)">B. Sleep</button>
-    <button class="btn-option" onclick="check(this,false)">C. Cook</button>
-    <button class="btn-option" onclick="check(this,false)">D. Travel</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="لغة الإعلام الرقمي عادة ما تكون:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">لغة الإعلام الرقمي عادة ما تكون:</div>
-    <p>11. Digital media language is usually: </p>
-    <button class="btn-option" onclick="check(this,false)">A. Formal</button>
-    <button class="btn-option" onclick="check(this,true)">B. Short and simple</button>
-    <button class="btn-option" onclick="check(this,false)">C. Old</button>
-    <button class="btn-option" onclick="check(this,false)">D. Difficult</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="أي جهاز يستخدم للإعلام الرقمي؟">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">أي جهاز يستخدم للإعلام الرقمي؟</div>
-    <p>12. Which device is used for digital media?</p>
-    <button class="btn-option" onclick="check(this,false)">A. Radio</button>
-    <button class="btn-option" onclick="check(this,true)">B. Smartphone</button>
-    <button class="btn-option" onclick="check(this,false)">C. Printer</button>
-    <button class="btn-option" onclick="check(this,false)">D. Notebook</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="فيسبوك هو:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">فيسبوك هو:</div>
-    <p>13. Facebook is a:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Book</button>
-    <button class="btn-option" onclick="check(this,true)">B. Social media platform</button>
-    <button class="btn-option" onclick="check(this,false)">A. Newspaper</button>
-    <button class="btn-option" onclick="check(this,false)">D. Radio</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="الإعلام الرقمي سريع بسبب:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">الإعلام الرقمي سريع بسبب:</div>
-    <p>14. Digital media is fast because of the:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Paper</button>
-    <button class="btn-option" onclick="check(this,true)">B. Internet</button>
-    <button class="btn-option" onclick="check(this,false)">C. Library</button>
-    <button class="btn-option" onclick="check(this,false)">D. Post office</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="الأخبار المزيفة هي:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">الأخبار المزيفة هي:</div>
-    <p>15. Fake news is a:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Benefit</button>
-    <button class="btn-option" onclick="check(this,false)">B. Feature</button>
-    <button class="btn-option" onclick="check(this,true)">C. Disadvantage</button>
-    <button class="btn-option" onclick="check(this,false)">D. Tool</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="ماذا يرمز اختصار DM؟">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">ماذا يرمز اختصار DM؟</div>
-    <p>16. What does DM stand for?</p>
-    <button class="btn-option" onclick="check(this,false)">A. Digital Media</button>
-    <button class="btn-option" onclick="check(this,true)">B. Direct Message</button>
-    <button class="btn-option" onclick="check(this,false)">C. Data Message</button>
-    <button class="btn-option" onclick="check(this,false)">D. Daily Media</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="ماذا يرمز اختصار WWW؟">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">ماذا يرمز اختصار WWW؟</div>
-    <p>17. WWW stands for:</p>
-    <button class="btn-option" onclick="check(this,false)">A. World Web Wide</button>
-    <button class="btn-option" onclick="check(this,true)">B. World Wide Web</button>
-    <button class="btn-option" onclick="check(this,false)">C. Web World Wide</button>
-    <button class="btn-option" onclick="check(this,false)">D. Wide World Web</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="تستخدم خدمة SMS لـ:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">تستخدم خدمة SMS لـ:</div>
-    <p>18. SMS is used for:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Calls</button>
-    <button class="btn-option" onclick="check(this,false)">B. Emails</button>
-    <button class="btn-option" onclick="check(this,true)">C. Text messages</button>
-    <button class="btn-option" onclick="check(this,false)">D. Videos</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="كلمة APP تعني:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">كلمة APP تعني:</div>
-    <p>19. APP means:</p>
-    <button class="btn-option" onclick="check(this,false)">A. A program</button>
-    <button class="btn-option" onclick="check(this,true)">B. An application</button>
-    <button class="btn-option" onclick="check(this,false)">C. A paper</button>
-    <button class="btn-option" onclick="check(this,false)">D. A platform</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="الرموز التعبيرية (Emojis) شائعة في:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">الرموز التعبيرية (Emojis) شائعة في:</div>
-    <p>20. Emojis are common in:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Books</button>
-    <button class="btn-option" onclick="check(this,false)">B. Print media</button>
-    <button class="btn-option" onclick="check(this,true)">C. Digital media</button>
-    <button class="btn-option" onclick="check(this,false)">D. Newspapers</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="الإعلانات عبر الإنترنت جزء من:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">الإعلانات عبر الإنترنت جزء من:</div>
-    <p>21. Online ads are part of:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Print media</button>
-    <button class="btn-option" onclick="check(this,true)">B. Digital media</button>
-    <button class="btn-option" onclick="check(this,false)">C. Radio media</button>
-    <button class="btn-option" onclick="check(this,false)">D. TV media</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="يصل الإعلام الرقمي إلى:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">يصل الإعلام الرقمي إلى:</div>
-    <p>22. Digital media reaches:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Local people only</button>
-    <button class="btn-option" onclick="check(this,false)">B. One country</button>
-    <button class="btn-option" onclick="check(this,true)">C. Global audience</button>
-    <button class="btn-option" onclick="check(this,false)">D. Few users</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="يستخدم تيك توك بشكل أساسي لمشاركة:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">يستخدم تيك توك بشكل أساسي لمشاركة:</div>
-    <p>23. TikTok is mainly used to share:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Letters</button>
-    <button class="btn-option" onclick="check(this,true)">B. Short videos</button>
-    <button class="btn-option" onclick="check(this,false)">C. Books</button>
-    <button class="btn-option" onclick="check(this,false)">D. Newspapers</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="محتوى الإعلام الرقمي عادة ما يكون:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">محتوى الإعلام الرقمي عادة ما يكون:</div>
-    <p>24. Digital media content is usually:</p>
-    <button class="btn-option" onclick="check(this,true)">A. Updated quickly</button>
-    <button class="btn-option" onclick="check(this,false)">B. Very old</button>
-    <button class="btn-option" onclick="check(this,false)">C. Monthly</button>
-    <button class="btn-option" onclick="check(this,false)">D. Yearly</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="أي مما يلي ليس منصة تواصل اجتماعي؟">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">أي مما يلي ليس منصة تواصل اجتماعي؟</div>
-    <p>25. Which one is NOT a social media platform?</p>
-    <button class="btn-option" onclick="check(this,false)">A. Instagram</button>
-    <button class="btn-option" onclick="check(this,false)">B. TikTok</button>
-    <button class="btn-option" onclick="check(this,true)">C. Newspaper</button>
-    <button class="btn-option" onclick="check(this,false)">D. Facebook</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="التواصل عبر الإنترنت يكون في الغالب:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">التواصل عبر الإنترنت يكون في الغالب:</div>
-    <p>26. Online communication is mostly:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Slow</button>
-    <button class="btn-option" onclick="check(this,true)">B. Instant</button>
-    <button class="btn-option" onclick="check(this,false)">C. Weekly</button>
-    <button class="btn-option" onclick="check(this,false)">D. Rare</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="يستخدم الهاشتاج (#) لـ:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">يستخدم الهاشتاج (#) لـ:</div>
-    <p>27. A hashtag (#) is used to:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Decorate text</button>
-    <button class="btn-option" onclick="check(this,true)">B. Organize content</button>
-    <button class="btn-option" onclick="check(this,false)">C. Print pages</button>
-    <button class="btn-option" onclick="check(this,false)">D. Write books</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="أي اختصار يعني الذكاء الاصطناعي؟">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">أي اختصار يعني الذكاء الاصطناعي؟</div>
-    <p>28. Which abbreviation means Artificial Intelligence?</p>
-    <button class="btn-option" onclick="check(this,false)">A. IT</button>
-    <button class="btn-option" onclick="check(this,true)">B. AI</button>
-    <button class="btn-option" onclick="check(this,false)">C. CPU</button>
-    <button class="btn-option" onclick="check(this,false)">D. URL</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="تستخدم الواي فاي (Wi-Fi) لـ:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">تستخدم الواي فاي (Wi-Fi) لـ:</div>
-    <p>29. Wi-Fi is used for:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Printing</button>
-    <button class="btn-option" onclick="check(this,true)">B. Wireless internet</button>
-    <button class="btn-option" onclick="check(this,false)">C. Typing</button>
-    <button class="btn-option" onclick="check(this,false)">D. Drawing</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="ملف PDF هو نوع من:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">ملف PDF هو نوع من:</div>
-    <p>30. PDF is a type of:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Video file</button>
-    <button class="btn-option" onclick="check(this,false)">B. Audio file</button>
-    <button class="btn-option" onclick="check(this,true)">C. Document file</button>
-    <button class="btn-option" onclick="check(this,false)">D. Image file</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="ذاكرة RAM هي:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">ذاكرة RAM هي:</div>
-    <p>31. RAM is:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Permanent storage</button>
-    <button class="btn-option" onclick="check(this,true)">B. Temporary memory</button>
-    <button class="btn-option" onclick="check(this,false)">C. Internet tool</button>
-    <button class="btn-option" onclick="check(this,false)">D. Media app</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="يسمح الإعلام الرقمي للمستخدمين بـ:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">يسمح الإعلام الرقمي للمستخدمين بـ:</div>
-    <p>32. Digital media allows users to:</p>
-    <button class="btn-option" onclick="check(this,true)">A. Interact</button>
-    <button class="btn-option" onclick="check(this,false)">B. Read only</button>
-    <button class="btn-option" onclick="check(this,false)">C. Listen only</button>
-    <button class="btn-option" onclick="check(this,false)">D. Watch only</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="التعلم عبر الإنترنت هو مثال على:">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">التعلم عبر الإنترنت هو مثال على:</div>
-    <p>33. Online learning is an example of:</p>
-    <button class="btn-option" onclick="check(this,false)">A. Print media</button>
-    <button class="btn-option" onclick="check(this,true)">B. Digital media</button>
-    <button class="btn-option" onclick="check(this,false)">C. Radio media</button>
-    <button class="btn-option" onclick="check(this,false)">D. Outdoor media</button>
-    <div class="result"></div>
-</div>
-
-<h3>Section 3: Past Simple & Past Continuous</h3>
-
-<div class="question" data-ar="كنت أشاهد التلفاز عندما وصل صديقي.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">كنت أشاهد التلفاز عندما وصل صديقي.</div>
-    <p>34. I _____ TV when my friend arrived.</p>
-    <button class="btn-option" onclick="check(this,false)">a) watched</button>
-    <button class="btn-option" onclick="check(this,true)">b) was watching</button>
-    <button class="btn-option" onclick="check(this,false)">c) watch</button>
-    <button class="btn-option" onclick="check(this,false)">d) watches</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="هي أنهت واجبها المنزلي الليلة الماضية.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">هي أنهت واجبها المنزلي الليلة الماضية.</div>
-    <p>35. She _____ her homework last night.</p>
-    <button class="btn-option" onclick="check(this,false)">a) was finishing</button>
-    <button class="btn-option" onclick="check(this,false)">b) finishes</button>
-    <button class="btn-option" onclick="check(this,true)">c) finished</button>
-    <button class="btn-option" onclick="check(this,false)">d) finish</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="بينما كانوا يمشون في الحديقة، بدأت تمطر.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">بينما كانوا يمشون في الحديقة، بدأت تمطر.</div>
-    <p>36. While they _____ in the park, it started to rain.</p>
-    <button class="btn-option" onclick="check(this,false)">a) walked</button>
-    <button class="btn-option" onclick="check(this,true)">b) were walking</button>
-    <button class="btn-option" onclick="check(this,false)">c) walk</button>
-    <button class="btn-option" onclick="check(this,false)">d) walks</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="ذهبنا إلى حديقة الحيوان أمس.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">ذهبنا إلى حديقة الحيوان أمس.</div>
-    <p>37. We _____ to the zoo yesterday.</p>
-    <button class="btn-option" onclick="check(this,false)">a) go</button>
-    <button class="btn-option" onclick="check(this,false)">b) were going</button>
-    <button class="btn-option" onclick="check(this,true)">c) went</button>
-    <button class="btn-option" onclick="check(this,false)">d) goes</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="ماذا كنت تفعل في الساعة الثامنة مساءً؟">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">ماذا كنت تفعل في الساعة الثامنة مساءً؟</div>
-    <p>38. What _____ you doing at 8 p.m.?</p>
-    <button class="btn-option" onclick="check(this,false)">a) was</button>
-    <button class="btn-option" onclick="check(this,true)">b) were</button>
-    <button class="btn-option" onclick="check(this,false)">c) did</button>
-    <button class="btn-option" onclick="check(this,false)">d) are</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="أسقط هاتفه بينما كان يركض.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">أسقط هاتفه بينما كان يركض.</div>
-    <p>39. He _____ his phone while he was running.</p>
-    <button class="btn-option" onclick="check(this,true)">a) dropped</button>
-    <button class="btn-option" onclick="check(this,false)">b) was dropping</button>
-    <button class="btn-option" onclick="check(this,false)">c) drops</button>
-    <button class="btn-option" onclick="check(this,false)">d) drop</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="كانت تمطر عندما غادرنا المنزل.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">كانت تمطر عندما غادرنا المنزل.</div>
-    <p>40. It _____ when we left the house.</p>
-    <button class="btn-option" onclick="check(this,false)">a) rained</button>
-    <button class="btn-option" onclick="check(this,false)">b) rains</button>
-    <button class="btn-option" onclick="check(this,true)">c) was raining</button>
-    <button class="btn-option" onclick="check(this,false)">d) is raining</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="أرسلت لي رسالة أمس.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">أرسلت لي رسالة أمس.</div>
-    <p>41. She _____ me a message yesterday.</p>
-    <button class="btn-option" onclick="check(this,true)">a) sent</button>
-    <button class="btn-option" onclick="check(this,false)">b) was sending</button>
-    <button class="btn-option" onclick="check(this,false)">c) sends</button>
-    <button class="btn-option" onclick="check(this,false)">d) send</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="كنت أطبخ العشاء عندما انطفأت الأنوار.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">كنت أطبخ العشاء عندما انطفأت الأنوار.</div>
-    <p>42. I _____ dinner when the lights went off.</p>
-    <button class="btn-option" onclick="check(this,false)">a) cooked</button>
-    <button class="btn-option" onclick="check(this,true)">b) was cooking</button>
-    <button class="btn-option" onclick="check(this,false)">c) cook</button>
-    <button class="btn-option" onclick="check(this,false)">d) cooks</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="فازوا بالمباراة في عطلة نهاية الأسبوع الماضي.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">فازوا بالمباراة في عطلة نهاية الأسبوع الماضي.</div>
-    <p>43. They _____ the match last weekend.</p>
-    <button class="btn-option" onclick="check(this,false)">a) win</button>
-    <button class="btn-option" onclick="check(this,false)">b) were winning</button>
-    <button class="btn-option" onclick="check(this,true)">c) won</button>
-    <button class="btn-option" onclick="check(this,false)">d) wins</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="بينما كنت استمع للموسيقى، كانت أختي تدرس.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">بينما كنت استمع للموسيقى، كانت أختي تدرس.</div>
-    <p>44. While I _____ to music, my sister was studying.</p>
-    <button class="btn-option" onclick="check(this,false)">a) listened</button>
-    <button class="btn-option" onclick="check(this,true)">b) was listening</button>
-    <button class="btn-option" onclick="check(this,false)">c) listen</button>
-    <button class="btn-option" onclick="check(this,false)">d) listens</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="كنا متعبين جداً بعد الرحلة.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">كنا متعبين جداً بعد الرحلة.</div>
-    <p>45. We _____ very tired after the trip.</p>
-    <button class="btn-option" onclick="check(this,true)">a) were</button>
-    <button class="btn-option" onclick="check(this,false)">b) was</button>
-    <button class="btn-option" onclick="check(this,false)">c) are</button>
-    <button class="btn-option" onclick="check(this,false)">d) be</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="فتحت الباب وخرجت.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">فتحت الباب وخرجت.</div>
-    <p>46. She _____ the door and walked out.</p>
-    <button class="btn-option" onclick="check(this,false)">a) opens</button>
-    <button class="btn-option" onclick="check(this,false)">b) was opening</button>
-    <button class="btn-option" onclick="check(this,true)">c) opened</button>
-    <button class="btn-option" onclick="check(this,false)">d) open</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="كان الأطفال يلعبون في الحديقة طوال فترة بعد الظهر.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">كان الأطفال يلعبون في الحديقة طوال فترة بعد الظهر.</div>
-    <p>47. The children _____ in the garden all afternoon.</p>
-    <button class="btn-option" onclick="check(this,false)">a) played</button>
-    <button class="btn-option" onclick="check(this,true)">b) were playing</button>
-    <button class="btn-option" onclick="check(this,false)">c) play</button>
-    <button class="btn-option" onclick="check(this,false)">d) plays</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="رأيته في السوبر ماركت أمس.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">رأيته في السوبر ماركت أمس.</div>
-    <p>48. I _____ him at the supermarket yesterday.</p>
-    <button class="btn-option" onclick="check(this,false)">a) see</button>
-    <button class="btn-option" onclick="check(this,false)">b) was seeing</button>
-    <button class="btn-option" onclick="check(this,true)">c) saw</button>
-    <button class="btn-option" onclick="check(this,false)">d) sees</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="بينما كان المعلم يشرح، كان الطلاب يكتبون الملاحظات.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">بينما كان المعلم يشرح، كان الطلاب يكتبون الملاحظات.</div>
-    <p>49. While the teacher _____, the students were writing notes.</p>
-    <button class="btn-option" onclick="check(this,false)">a) explained</button>
-    <button class="btn-option" onclick="check(this,true)">b) was explaining</button>
-    <button class="btn-option" onclick="check(this,false)">c) explains</button>
-    <button class="btn-option" onclick="check(this,false)">d) explain</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="نظفت غرفتها يوم السبت الماضي.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">نظفت غرفتها يوم السبت الماضي.</div>
-    <p>50. She _____ her room last Saturday.</p>
-    <button class="btn-option" onclick="check(this,true)">a) cleaned</button>
-    <button class="btn-option" onclick="check(this,false)">b) was cleaning</button>
-    <button class="btn-option" onclick="check(this,false)">c) clean</button>
-    <button class="btn-option" onclick="check(this,false)">d) cleans</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="كنا نتناول الغداء في الساعة الواحدة ظهر أمس.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">كنا نتناول الغداء في الساعة الواحدة ظهر أمس.</div>
-    <p>51. We _____ lunch at 1 p.m. yesterday.</p>
-    <button class="btn-option" onclick="check(this,false)">a) had</button>
-    <button class="btn-option" onclick="check(this,true)">b) were having</button>
-    <button class="btn-option" onclick="check(this,false)">c) have</button>
-    <button class="btn-option" onclick="check(this,false)">d) are having</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="كان متأخراً عن الصف أمس.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">كان متأخراً عن الصف أمس.</div>
-    <p>52. He _____ late for class yesterday.</p>
-    <button class="btn-option" onclick="check(this,false)">a) is</button>
-    <button class="btn-option" onclick="check(this,true)">b) was</button>
-    <button class="btn-option" onclick="check(this,false)">c) were</button>
-    <button class="btn-option" onclick="check(this,false)">d) be</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="أنهوا مشروعهم الليلة الماضية.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">أنهوا مشروعهم الليلة الماضية.</div>
-    <p>53. They _____ their project last night.</p>
-    <button class="btn-option" onclick="check(this,true)">a) finished</button>
-    <button class="btn-option" onclick="check(this,false)">b) were finishing</button>
-    <button class="btn-option" onclick="check(this,false)">c) finish</button>
-    <button class="btn-option" onclick="check(this,false)">d) finishes</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="بينما كانت تمشي في الشارع، رأت حادثاً.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">بينما كانت تمشي في الشارع، رأت حادثاً.</div>
-    <p>54. While she _____ down the street, she saw an accident.</p>
-    <button class="btn-option" onclick="check(this,false)">a) walked</button>
-    <button class="btn-option" onclick="check(this,true)">b) was walking</button>
-    <button class="btn-option" onclick="check(this,false)">c) walk</button>
-    <button class="btn-option" onclick="check(this,false)">d) walks</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="نمت أثناء الفيلم.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">نمت أثناء الفيلم.</div>
-    <p>55. I _____ asleep during the movie.</p>
-    <button class="btn-option" onclick="check(this,true)">a) fell</button>
-    <button class="btn-option" onclick="check(this,false)">b) was falling</button>
-    <button class="btn-option" onclick="check(this,false)">c) fall</button>
-    <button class="btn-option" onclick="check(this,false)">d) falls</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="في الساعة التاسعة مساءً، كانوا يتناولون العشاء.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">في الساعة التاسعة مساءً، كانوا يتناولون العشاء.</div>
-    <p>56. At 9 p.m., they _____ dinner.</p>
-    <button class="btn-option" onclick="check(this,false)">a) ate</button>
-    <button class="btn-option" onclick="check(this,true)">b) were eating</button>
-    <button class="btn-option" onclick="check(this,false)">c) eat</button>
-    <button class="btn-option" onclick="check(this,false)">d) eats</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="ارتدت فستاناً جميلاً في الحفلة.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">ارتدت فستاناً جميلاً في الحفلة.</div>
-    <p>57. She _____ a beautiful dress at the party.</p>
-    <button class="btn-option" onclick="check(this,true)">a) wore</button>
-    <button class="btn-option" onclick="check(this,false)">b) was wearing</button>
-    <button class="btn-option" onclick="check(this,false)">c) wear</button>
-    <button class="btn-option" onclick="check(this,false)">d) wears</button>
-    <div class="result"></div>
-</div>
-
-<div class="question" data-ar="كنت نائماً عندما رن المنبه.">
-    <button class="translate-btn" onclick="toggleTrans(this)">Translate / ترجمة</button>
-    <div class="translation-text">كنت نائماً عندما رن المنبه.</div>
-    <p>58. I _____ when the alarm rang.</p>
-    <button class="btn-option" onclick="check(this,false)">a) slept</button>
-    <button class="btn-option" onclick="check(this,true)">b) was sleeping</button>
-    <button class="btn-option" onclick="check(this,false)">c) sleep</button>
-    <button class="btn-option" onclick="check(this,false)">d) sleeps</button>
-    <div class="result"></div>
-</div>
-
-<script>
-let score = 0;
-let total = 58;
-
-function check(btn, correct) {
-    let parent = btn.parentElement;
-    if (parent.classList.contains("answered")) return;
-    parent.classList.add("answered");
-
-    let buttons = parent.querySelectorAll(".btn-option");
-    let resultBox = parent.querySelector(".result");
-
-    buttons.forEach(b => {
-        if (b.getAttribute("onclick").includes("true")) {
-            b.classList.add("correct");
-        }
-    });
-
-    if (correct) {
-        score++;
-        resultBox.innerHTML = "<span style='color: green;'>✅ Correct!</span>";
-    } else {
-        btn.classList.add("wrong");
-        resultBox.innerHTML = "<span style='color: red;'>❌ Wrong!</span>";
-    }
-
-    document.getElementById("scoreBox").innerText = "Score: " + score + " / " + total;
-}
-
-function toggleTrans(btn) {
-    let transText = btn.nextElementSibling;
-    transText.style.display = (transText.style.display === "block") ? "none" : "block";
-}
-</script>
-
+    <div id="scoreBox">النتيجة: 0 / 58</div>
+    <h2>الاختبار الشامل (الإعلام الرقمي والقواعد)</h2>
+
+    <div id="quiz-container">
+        </div>
 </div>
 
 <div class="footer">
-<a href="https://www.instagram.com/h94g/" target="_blank">
-Developed by <strong>حيدر الخفاجي</strong>
-</a>
+    Developed by <a href="https://www.instagram.com/h94g/" target="_blank">حيدر الخفاجي</a>
 </div>
 
+<script>
+const questions = [
+    // Section 1: Digital Media Reading
+    { q: "Which statement best describes the role of digital media in the modern era?", arQ: "أي عبارة تصف بشكل أفضل دور الإعلام الرقمي في العصر الحديث؟", options: [
+        { en: "It is used only for entertainment", ar: "يستخدم فقط للترفيه", correct: false },
+        { en: "It replaces all traditional media completely", ar: "يستبدل كل الإعلام التقليدي تماماً", correct: false },
+        { en: "It affects education, business, and communication", ar: "يؤثر على التعليم والأعمال والتواصل", correct: true },
+        { en: "It is limited to young people only", ar: "مقتصر على الشباب فقط", correct: false }
+    ]},
+    { q: "Why is digital media considered more effective than traditional media today?", arQ: "لماذا يعتبر الإعلام الرقمي أكثر فاعلية من الإعلام التقليدي اليوم؟", options: [
+        { en: "Because it depends on printing", ar: "لأنه يعتمد على الطباعة", correct: false },
+        { en: "Because it is slower", ar: "لأنه أبطأ", correct: false },
+        { en: "Because it allows fast and interactive communication", ar: "لأنه يسمح بتواصل سريع وتفاعلي", correct: true },
+        { en: "Because it does not use technology", ar: "لأنه لا يستخدم التكنولوجيا", correct: false }
+    ]},
+    { q: "One major disadvantage of digital media mentioned in the text is:", arQ: "أحد السلبيات الرئيسية للإعلام الرقمي المذكورة في النص هي:", options: [
+        { en: "Lack of information", ar: "نقص المعلومات", correct: false },
+        { en: "High cost", ar: "التكلفة العالية", correct: false },
+        { en: "Privacy problems and fake news", ar: "مشاكل الخصوصية والأخبار المزيفة", correct: true },
+        { en: "Limited audience", ar: "جمهور محدود", correct: false }
+    ]},
+    { q: "Companies use digital media mainly because it:", arQ: "تستخدم الشركات الإعلام الرقمي بشكل أساسي لأنه:", options: [
+        { en: "Is difficult to use", ar: "صعب الاستخدام", correct: false },
+        { en: "Is expensive", ar: "غالي الثمن", correct: false },
+        { en: "Reaches a global audience", ar: "يصل إلى جمهور عالمي", correct: true },
+        { en: "Is only for students", ar: "للطلاب فقط", correct: false }
+    ]},
+    { q: "What is the main idea of the passage?", arQ: "ما هي الفكرة الرئيسية للنص؟", options: [
+        { en: "Digital media is dangerous", ar: "الإعلام الرقمي خطر", correct: false },
+        { en: "Digital media is only for fun", ar: "الإعلام الرقمي للمتعة فقط", correct: false },
+        { en: "Digital media has both advantages and disadvantages", ar: "للإعلام الرقمي مميزات وعيوب", correct: true },
+        { en: "Digital media is the same as traditional media", ar: "الإعلام الرقمي مثل الإعلام التقليدي", correct: false }
+    ]},
+
+    // Section 2: Full Exam (General Tech & Media)
+    { q: "Digital media works through the:", arQ: "الإعلام الرقمي يعمل من خلال:", options: [
+        { en: "Internet", ar: "الإنترنت", correct: true },
+        { en: "Paper", ar: "الورق", correct: false },
+        { en: "Books", ar: "الكتب", correct: false },
+        { en: "Radio", ar: "الراديو", correct: false }
+    ]},
+    { q: "Which one is digital media?", arQ: "أي من هذه يعتبر إعلاماً رقمياً؟", options: [
+        { en: "Newspaper", ar: "جريدة", correct: false },
+        { en: "Magazine", ar: "مجلة", correct: false },
+        { en: "Facebook", ar: "فيسبوك", correct: true },
+        { en: "Radio", ar: "راديو", correct: false }
+    ]},
+    { q: "YouTube is an example of:", arQ: "يوتيوب هو مثال على:", options: [
+        { en: "Print media", ar: "الإعلام المطبوع", correct: false },
+        { en: "Digital media", ar: "الإعلام الرقمي", correct: true },
+        { en: "Radio media", ar: "إعلام إذاعي", correct: false },
+        { en: "Outdoor media", ar: "إعلام خارجي", correct: false }
+    ]},
+    { q: "Digital media can include:", arQ: "الإعلام الرقمي يمكن أن يشمل:", options: [
+        { en: "Text only", ar: "نص فقط", correct: false },
+        { en: "Images only", ar: "صور فقط", correct: false },
+        { en: "Videos only", ar: "فيديو فقط", correct: false },
+        { en: "All of the above", ar: "كل ما سبق", correct: true }
+    ]},
+    { q: "People use digital media to:", arQ: "يستخدم الناس الإعلام الرقمي لـ:", options: [
+        { en: "Share information", ar: "مشاركة المعلومات", correct: true },
+        { en: "Sleep", ar: "النوم", correct: false },
+        { en: "Cook", ar: "الطبخ", correct: false },
+        { en: "Travel", ar: "السفر", correct: false }
+    ]},
+    { q: "Digital media language is usually:", arQ: "لغة الإعلام الرقمي عادة ما تكون:", options: [
+        { en: "Formal", ar: "رسمية", correct: false },
+        { en: "Short and simple", ar: "قصيرة وبسيطة", correct: true },
+        { en: "Old", ar: "قديمة", correct: false },
+        { en: "Difficult", ar: "صعبة", correct: false }
+    ]},
+    { q: "Which device is used for digital media?", arQ: "أي جهاز يستخدم للإعلام الرقمي؟", options: [
+        { en: "Radio", ar: "راديو", correct: false },
+        { en: "Smartphone", ar: "هاتف ذكي", correct: true },
+        { en: "Printer", ar: "طابعة", correct: false },
+        { en: "Notebook", ar: "دفتر", correct: false }
+    ]},
+    { q: "Facebook is a:", arQ: "فيسبوك هو:", options: [
+        { en: "Book", ar: "كتاب", correct: false },
+        { en: "Social media platform", ar: "منصة تواصل اجتماعي", correct: true },
+        { en: "Newspaper", ar: "جريدة", correct: false },
+        { en: "Radio", ar: "راديو", correct: false }
+    ]},
+    { q: "Digital media is fast because of the:", arQ: "الإعلام الرقمي سريع بسبب:", options: [
+        { en: "Paper", ar: "الورق", correct: false },
+        { en: "Internet", ar: "الإنترنت", correct: true },
+        { en: "Library", ar: "المكتبة", correct: false },
+        { en: "Post office", ar: "مكتب البريد", correct: false }
+    ]},
+    { q: "Fake news is a:", arQ: "الأخبار المزيفة هي:", options: [
+        { en: "Benefit", ar: "فائدة", correct: false },
+        { en: "Feature", ar: "ميزة", correct: false },
+        { en: "Disadvantage", ar: "عيب/سلبية", correct: true },
+        { en: "Tool", ar: "أداة", correct: false }
+    ]},
+    { q: "What does DM stand for?", arQ: "ماذا يرمز اختصار DM؟", options: [
+        { en: "Digital Media", ar: "إعلام رقمي", correct: false },
+        { en: "Direct Message", ar: "رسالة مباشرة", correct: true },
+        { en: "Data Message", ar: "رسالة بيانات", correct: false },
+        { en: "Daily Media", ar: "إعلام يومي", correct: false }
+    ]},
+    { q: "WWW stands for:", arQ: "WWW ترمز إلى:", options: [
+        { en: "World Web Wide", ar: "ويب عالمي واسع", correct: false },
+        { en: "World Wide Web", ar: "الشبكة العنكبوتية العالمية", correct: true },
+        { en: "Web World Wide", ar: "ويب عالمي", correct: false },
+        { en: "Wide World Web", ar: "ويب عالمي واسع", correct: false }
+    ]},
+    { q: "SMS is used for:", arQ: "SMS تستخدم لـ:", options: [
+        { en: "Calls", ar: "المكالمات", correct: false },
+        { en: "Emails", ar: "الإيميلات", correct: false },
+        { en: "Text messages", ar: "الرسائل النصية", correct: true },
+        { en: "Videos", ar: "الفيديوهات", correct: false }
+    ]},
+    { q: "APP means:", arQ: "كلمة APP تعني:", options: [
+        { en: "A program", ar: "برنامج", correct: false },
+        { en: "An application", ar: "تطبيق", correct: true },
+        { en: "A paper", ar: "ورقة", correct: false },
+        { en: "A platform", ar: "منصة", correct: false }
+    ]},
+    { q: "Emojis are common in:", arQ: "الرموز التعبيرية شائعة في:", options: [
+        { en: "Books", ar: "الكتب", correct: false },
+        { en: "Print media", ar: "الإعلام المطبوع", correct: false },
+        { en: "Digital media", ar: "الإعلام الرقمي", correct: true },
+        { en: "Newspapers", ar: "الجرائد", correct: false }
+    ]},
+    { q: "Online ads are part of:", arQ: "الإعلانات عبر الإنترنت جزء من:", options: [
+        { en: "Print media", ar: "الإعلام المطبوع", correct: false },
+        { en: "Digital media", ar: "الإعلام الرقمي", correct: true },
+        { en: "Radio media", ar: "إعلام إذاعي", correct: false },
+        { en: "TV media", ar: "إعلام تلفزيوني", correct: false }
+    ]},
+    { q: "Digital media reaches:", arQ: "الإعلام الرقمي يصل إلى:", options: [
+        { en: "Local people only", ar: "المحليين فقط", correct: false },
+        { en: "One country", ar: "بلد واحد", correct: false },
+        { en: "Global audience", ar: "جمهور عالمي", correct: true },
+        { en: "Few users", ar: "مستخدمين قليلين", correct: false }
+    ]},
+    { q: "TikTok is mainly used to share:", arQ: "تيك توك يستخدم بشكل أساسي لمشاركة:", options: [
+        { en: "Letters", ar: "الرسائل الورقية", correct: false },
+        { en: "Short videos", ar: "فيديوهات قصيرة", correct: true },
+        { en: "Books", ar: "الكتب", correct: false },
+        { en: "Newspapers", ar: "الجرائد", correct: false }
+    ]},
+    { q: "Digital media content is usually:", arQ: "محتوى الإعلام الرقمي عادة ما يكون:", options: [
+        { en: "Updated quickly", ar: "يحدث بسرعة", correct: true },
+        { en: "Very old", ar: "قديم جداً", correct: false },
+        { en: "Monthly", ar: "شهري", correct: false },
+        { en: "Yearly", ar: "سنوي", correct: false }
+    ]},
+    { q: "Which one is NOT a social media platform?", arQ: "أي مما يلي ليس منصة تواصل اجتماعي؟", options: [
+        { en: "Instagram", ar: "انستغرام", correct: false },
+        { en: "TikTok", ar: "تيك توك", correct: false },
+        { en: "Newspaper", ar: "جريدة", correct: true },
+        { en: "Facebook", ar: "فيسبوك", correct: false }
+    ]},
+    { q: "Online communication is mostly:", arQ: "التواصل عبر الإنترنت غالباً ما يكون:", options: [
+        { en: "Slow", ar: "بطيء", correct: false },
+        { en: "Instant", ar: "فوري", correct: true },
+        { en: "Weekly", ar: "أسبوعي", correct: false },
+        { en: "Rare", ar: "نادر", correct: false }
+    ]},
+    { q: "A hashtag (#) is used to:", arQ: "الهاشتاج (#) يستخدم لـ:", options: [
+        { en: "Decorate text", ar: "تزيين النص", correct: false },
+        { en: "Organize content", ar: "تنظيم المحتوى", correct: true },
+        { en: "Print pages", ar: "طباعة الصفحات", correct: false },
+        { en: "Write books", ar: "كتابة الكتب", correct: false }
+    ]},
+    { q: "Which abbreviation means Artificial Intelligence?", arQ: "أي اختصار يعني الذكاء الاصطناعي؟", options: [
+        { en: "IT", ar: "تكنولوجيا المعلومات", correct: false },
+        { en: "AI", ar: "الذكاء الاصطناعي", correct: true },
+        { en: "CPU", ar: "المعالج", correct: false },
+        { en: "URL", ar: "رابط الموقع", correct: false }
+    ]},
+    { q: "Wi-Fi is used for:", arQ: "الواي فاي يستخدم لـ:", options: [
+        { en: "Printing", ar: "الطباعة", correct: false },
+        { en: "Wireless internet", ar: "إنترنت لاسلكي", correct: true },
+        { en: "Typing", ar: "الكتابة", correct: false },
+        { en: "Drawing", ar: "الرسم", correct: false }
+    ]},
+    { q: "PDF is a type of:", arQ: "PDF هو نوع من:", options: [
+        { en: "Video file", ar: "ملف فيديو", correct: false },
+        { en: "Audio file", ar: "ملف صوتي", correct: false },
+        { en: "Document file", ar: "ملف مستندات", correct: true },
+        { en: "Image file", ar: "ملف صور", correct: false }
+    ]},
+    { q: "RAM is:", arQ: "ذاكرة RAM هي:", options: [
+        { en: "Permanent storage", ar: "تخزين دائم", correct: false },
+        { en: "Temporary memory", ar: "ذاكرة مؤقتة", correct: true },
+        { en: "Internet tool", ar: "أداة إنترنت", correct: false },
+        { en: "Media app", ar: "تطبيق إعلامي", correct: false }
+    ]},
+
+    // Section 3: Grammar (Past Simple & Continuous)
+    { q: "I _____ TV when my friend arrived.", arQ: "كنت أشاهد التلفاز عندما وصل صديقي.", options: [
+        { en: "watched", ar: "شاهدت (ماضي بسيط)", correct: false },
+        { en: "was watching", ar: "كنت أشاهد (ماضي مستمر)", correct: true },
+        { en: "watch", ar: "أشاهد", correct: false },
+        { en: "watches", ar: "يشاهد", correct: false }
+    ]},
+    { q: "She _____ her homework last night.", arQ: "أنهت واجبها المنزلي الليلة الماضية.", options: [
+        { en: "was finishing", ar: "كانت تنهي", correct: false },
+        { en: "finishes", ar: "تنهي", correct: false },
+        { en: "finished", ar: "أنهت (ماضي بسيط)", correct: true },
+        { en: "finish", ar: "تنهي", correct: false }
+    ]},
+    { q: "While they _____ in the park, it started to rain.", arQ: "بينما كانوا يمشون في الحديقة، بدأت تمطر.", options: [
+        { en: "walked", ar: "مشوا", correct: false },
+        { en: "were walking", ar: "كانوا يمشون", correct: true },
+        { en: "walk", ar: "يمشون", correct: false },
+        { en: "walks", ar: "يمشي", correct: false }
+    ]},
+    { q: "We _____ to the zoo yesterday.", arQ: "ذهبنا إلى حديقة الحيوان أمس.", options: [
+        { en: "go", ar: "نذهب", correct: false },
+        { en: "were going", ar: "كنا ذاهبين", correct: false },
+        { en: "went", ar: "ذهبنا (ماضي)", correct: true },
+        { en: "goes", ar: "يذهب", correct: false }
+    ]},
+    { q: "What _____ you doing at 8 p.m.?", arQ: "ماذا كنت تفعل في الساعة الثامنة مساءً؟", options: [
+        { en: "was", ar: "كان", correct: false },
+        { en: "were", ar: "كنتم/كنت", correct: true },
+        { en: "did", ar: "فعلت", correct: false },
+        { en: "are", ar: "تكون", correct: false }
+    ]},
+    { q: "He _____ his phone while he was running.", arQ: "أسقط هاتفه بينما كان يركض.", options: [
+        { en: "dropped", ar: "أسقط", correct: true },
+        { en: "was dropping", ar: "كان يسقط", correct: false },
+        { en: "drops", ar: "يسقط", correct: false },
+        { en: "drop", ar: "يسقط", correct: false }
+    ]},
+    { q: "It _____ when we left the house.", arQ: "كانت تمطر عندما غادرنا المنزل.", options: [
+        { en: "rained", ar: "أمطرت", correct: false },
+        { en: "was raining", ar: "كانت تمطر", correct: true },
+        { en: "rains", ar: "تمطر", correct: false },
+        { en: "is raining", ar: "تمطر الآن", correct: false }
+    ]},
+    { q: "She _____ me a message yesterday.", arQ: "أرسلت لي رسالة أمس.", options: [
+        { en: "sent", ar: "أرسلت", correct: true },
+        { en: "was sending", ar: "كانت ترسل", correct: false },
+        { en: "sends", ar: "ترسل", correct: false },
+        { en: "send", ar: "ترسل", correct: false }
+    ]},
+    { q: "I _____ dinner when the lights went off.", arQ: "كنت أطبخ العشاء عندما انطفأت الأنوار.", options: [
+        { en: "cooked", ar: "طبخت", correct: false },
+        { en: "was cooking", ar: "كنت أطبخ", correct: true },
+        { en: "cook", ar: "أطبخ", correct: false },
+        { en: "cooks", ar: "يطبخ", correct: false }
+    ]},
+    { q: "They _____ the match last weekend.", arQ: "فازوا بالمباراة نهاية الأسبوع الماضي.", options: [
+        { en: "win", ar: "يفوز", correct: false },
+        { en: "were winning", ar: "كانوا يفوزون", correct: false },
+        { en: "won", ar: "فازوا", correct: true },
+        { en: "wins", ar: "يفوز", correct: false }
+    ]},
+    { q: "While I _____ to music, my sister was studying.", arQ: "بينما كنت أستمع للموسيقى، كانت أختي تدرس.", options: [
+        { en: "listened", ar: "استمعت", correct: false },
+        { en: "was listening", ar: "كنت أستمع", correct: true },
+        { en: "listen", ar: "أستمع", correct: false },
+        { en: "listens", ar: "يستمع", correct: false }
+    ]},
+    { q: "We _____ very tired after the trip.", arQ: "كنا متعبين جداً بعد الرحلة.", options: [
+        { en: "were", ar: "كنا", correct: true },
+        { en: "was", ar: "كان", correct: false },
+        { en: "are", ar: "نكون", correct: false },
+        { en: "be", ar: "يكون", correct: false }
+    ]},
+    { q: "She _____ the door and walked out.", arQ: "فتحت الباب وخرجت.", options: [
+        { en: "opens", ar: "تفتح", correct: false },
+        { en: "was opening", ar: "كانت تفتح", correct: false },
+        { en: "opened", ar: "فتحت", correct: true },
+        { en: "open", ar: "يفتح", correct: false }
+    ]},
+    { q: "The children _____ in the garden all afternoon.", arQ: "كان الأطفال يلعبون في الحديقة طوال الظهيرة.", options: [
+        { en: "played", ar: "لعبوا", correct: false },
+        { en: "were playing", ar: "كانوا يلعبون", correct: true },
+        { en: "play", ar: "يلعب", correct: false },
+        { en: "plays", ar: "يلعب", correct: false }
+    ]},
+    { q: "I _____ him at the supermarket yesterday.", arQ: "رأيته في السوبر ماركت أمس.", options: [
+        { en: "see", ar: "أرى", correct: false },
+        { en: "was seeing", ar: "كنت أرى", correct: false },
+        { en: "saw", ar: "رأيت", correct: true },
+        { en: "sees", ar: "يرى", correct: false }
+    ]},
+    { q: "While the teacher _____, the students were writing notes.", arQ: "بينما كان المعلم يشرح، كان الطلاب يكتبون الملاحظات.", options: [
+        { en: "explained", ar: "شرح", correct: false },
+        { en: "was explaining", ar: "كان يشرح", correct: true },
+        { en: "explains", ar: "يشرح", correct: false },
+        { en: "explain", ar: "يشرح", correct: false }
+    ]},
+    { q: "She _____ her room last Saturday.", arQ: "نظفت غرفتها السبت الماضي.", options: [
+        { en: "cleaned", ar: "نظفت", correct: true },
+        { en: "was cleaning", ar: "كانت تنظف", correct: false },
+        { en: "clean", ar: "ينظف", correct: false },
+        { en: "cleans", ar: "ينظف", correct: false }
+    ]},
+    { q: "We _____ lunch at 1 p.m. yesterday.", arQ: "كنا نتناول الغداء الساعة 1 أمس.", options: [
+        { en: "had", ar: "تناولنا", correct: false },
+        { en: "were having", ar: "كنا نتناول", correct: true },
+        { en: "have", ar: "يتناول", correct: false },
+        { en: "are having", ar: "نتناول الآن", correct: false }
+    ]},
+    { q: "He _____ late for class yesterday.", arQ: "كان متأخراً عن الدرس أمس.", options: [
+        { en: "is", ar: "يكون", correct: false },
+        { en: "was", ar: "كان", correct: true },
+        { en: "were", ar: "كانوا", correct: false },
+        { en: "be", ar: "يكون", correct: false }
+    ]},
+    { q: "They _____ their project last night.", arQ: "أنهوا مشروعهم الليلة الماضية.", options: [
+        { en: "finished", ar: "أنهوا", correct: true },
+        { en: "were finishing", ar: "كانوا ينهون", correct: false },
+        { en: "finish", ar: "ينهي", correct: false },
+        { en: "finishes", ar: "ينهي", correct: false }
+    ]},
+    { q: "While she _____ down the street, she saw an accident.", arQ: "بينما كانت تمشي في الشارع، رأت حادثاً.", options: [
+        { en: "walked", ar: "مشت", correct: false },
+        { en: "was walking", ar: "كانت تمشي", correct: true },
+        { en: "walk", ar: "يمشي", correct: false },
+        { en: "walks", ar: "يمشي", correct: false }
+    ]},
+    { q: "I _____ asleep during the movie.", arQ: "نمت أثناء الفيلم.", options: [
+        { en: "fell", ar: "سقط/دخل في النوم", correct: true },
+        { en: "was falling", ar: "كان يسقط", correct: false },
+        { en: "fall", ar: "يسقط", correct: false },
+        { en: "falls", ar: "يسقط", correct: false }
+    ]},
+    { q: "At 9 p.m., they _____ dinner.", arQ: "في الساعة 9، كانوا يتناولون العشاء.", options: [
+        { en: "ate", ar: "أكلوا", correct: false },
+        { en: "were eating", ar: "كانوا يأكلون", correct: true },
+        { en: "eat", ar: "يأكل", correct: false },
+        { en: "eats", ar: "يأكل", correct: false }
+    ]},
+    { q: "She _____ a beautiful dress at the party.", arQ: "ارتدت فستاناً جميلاً في الحفلة.", options: [
+        { en: "wore", ar: "ارتدت", correct: true },
+        { en: "was wearing", ar: "كانت ترتدي", correct: false },
+        { en: "wear", ar: "يرتدي", correct: false },
+        { en: "wears", ar: "يرتدي", correct: false }
+    ]},
+    { q: "I _____ when the alarm rang.", arQ: "كنت نائماً عندما رن المنبه.", options: [
+        { en: "slept", ar: "نمت", correct: false },
+        { en: "was sleeping", ar: "كنت نائماً", correct: true },
+        { en: "sleep", ar: "ينام", correct: false },
+        { en: "sleeps", ar: "ينام", correct: false }
+    ]}
+];
+
+let score = 0;
+const container = document.getElementById('quiz-container');
+
+function renderQuiz() {
+    questions.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.innerHTML = `
+            <button class="translate-btn" onclick="toggleTranslation(${index})">Translate / ترجمة</button>
+            <div id="trans-${index}" class="translation-area"><strong>السؤال:</strong> ${q.arQ}</div>
+            <div class="q-text">${index + 1}. ${q.q}</div>
+            <div id="options-${index}">
+                ${q.options.map((opt, optIdx) => `
+                    <button class="option" onclick="checkAnswer(${index}, ${optIdx}, this, ${opt.correct})">
+                        <span>${opt.en}</span>
+                        <span class="ar-opt">${opt.ar}</span>
+                    </button>
+                `).join('')}
+            </div>
+            <div id="result-${index}" class="result-msg"></div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+window.checkAnswer = function(qIdx, optIdx, btn, isCorrect) {
+    const parent = document.getElementById(`options-${qIdx}`);
+    if (parent.dataset.answered === "true") return;
+    parent.dataset.answered = "true";
+
+    const allOptions = parent.querySelectorAll('.option');
+    const resultMsg = document.getElementById(`result-${qIdx}`);
+    const correctOpt = questions[qIdx].options.find(o => o.correct);
+
+    allOptions.forEach(opt => {
+        opt.querySelector('.ar-opt').style.display = 'block';
+    });
+
+    if (isCorrect) {
+        score++;
+        btn.classList.add('correct');
+        resultMsg.innerHTML = `<span style="color: green;">✅ إجابة صحيحة: ${correctOpt.ar}</span>`;
+    } else {
+        btn.classList.add('wrong');
+        allOptions.forEach(opt => {
+             // تمييز الخيار الصحيح حتى لو لم يختاره المستخدم
+             if (opt.innerHTML.includes(correctOpt.en)) opt.classList.add('correct');
+        });
+        resultMsg.innerHTML = `<span style="color: red;">❌ إجابة خاطئة! الصحيح هو: ${correctOpt.en} (${correctOpt.ar})</span>`;
+    }
+    document.getElementById('scoreBox').innerText = `النتيجة: ${score} / ${questions.length}`;
+};
+
+window.toggleTranslation = function(index) {
+    const area = document.getElementById(`trans-${index}`);
+    const optionsAr = document.querySelectorAll(`#options-${index} .ar-opt`);
+    
+    if (area.style.display === 'block') {
+        area.style.display = 'none';
+        optionsAr.forEach(o => o.style.display = 'none');
+    } else {
+        area.style.display = 'block';
+        optionsAr.forEach(o => o.style.display = 'block');
+    }
+};
+
+renderQuiz();
+</script>
 </body>
 </html>
