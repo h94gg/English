@@ -6,157 +6,34 @@
 <title>Full Educational Quiz - 58 Questions</title>
 <style>
     /* 1. إعدادات الصفحة والخلفية الاحترافية */
-    body { 
-        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-        /* خلفية بتدرج لوني هادئ ومريح للعين */
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        margin: 0; 
-        padding: 40px 20px; 
-        direction: rtl; 
-        min-height: 100vh;
-        color: #2d3436;
-    }
-
-    /* 2. الحاوية الرئيسية (Container) */
-    .container { 
-        max-width: 950px; 
-        margin: auto; 
-        background: rgba(255, 255, 255, 0.95); 
-        padding: 50px 40px; 
-        border-radius: 30px; /* حواف دائرية ناعمة جداً */
-        box-shadow: 0 20px 60px rgba(0,0,0,0.1); /* ظل عميق واحترافي */
-        backdrop-filter: blur(10px); /* تأثير الزجاج الضبابي */
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    /* 3. إطار النتيجة (Score Board) - تصميم كبسولة */
-    .score-board {
-        position: sticky;
-        top: 25px;
-        background: linear-gradient(135deg, #6c5ce7, #a29bfe); /* تدرج بنفسجي ملكي */
-        color: white;
-        padding: 14px 40px;
-        border-radius: 50px; 
-        text-align: center;
-        font-size: 24px;
-        font-weight: 800;
-        z-index: 1000;
-        box-shadow: 0 10px 30px rgba(108, 92, 231, 0.4);
-        margin: 0 auto 50px auto;
-        width: fit-content;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .score-board:hover { 
-        transform: scale(1.1) translateY(-5px);
-        box-shadow: 0 15px 35px rgba(108, 92, 231, 0.5);
-    }
-
-    /* 4. حاوية السؤال (Question Block) */
-    .question-block { 
-        margin-bottom: 35px; 
-        padding: 30px; 
-        border-radius: 20px; 
-        background: #ffffff; 
-        border: 1px solid #edf2f7;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-        direction: ltr; 
-        text-align: left; 
-        position: relative;
-        overflow: hidden;
-    }
-    .question-block:hover {
-        transform: translateX(5px); /* حركة بسيطة لليمين عند التحويم */
-        box-shadow: 0 12px 25px rgba(0,0,0,0.08);
-        border-right: 5px solid #6c5ce7; /* خط جانبي ملون عند الاختيار */
-    }
-
-    /* 5. نصوص الأسئلة والترجمة */
-    .question-text { 
-        font-size: 20px; 
-        font-weight: 700; 
-        color: #2d3436; 
-        margin-bottom: 15px;
-        line-height: 1.4;
-    }
-    
-    .arabic-translation { 
-        color: #636e72; 
-        font-style: normal; 
-        direction: rtl; 
-        text-align: right; 
-        display: block; 
-        font-size: 16px; 
-        border-right: 5px solid #a29bfe; 
-        padding: 12px 20px;
-        background: #f8f9fa;
-        border-radius: 10px;
-        margin-bottom: 25px;
-        font-weight: 500;
-    }
-
-    /* 6. تنسيق خيارات الأجوبة (Buttons) */
-    .options-container { 
-        display: grid; 
-        grid-template-columns: 1fr; 
-        gap: 15px; 
-    }
-    
-    .option-btn { 
-        padding: 16px 25px; 
-        border: 2px solid #f1f2f6; 
-        border-radius: 15px; 
-        background: #fff; 
-        cursor: pointer; 
-        transition: all 0.25s ease; 
-        font-size: 17px; 
-        text-align: left; 
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center;
-        color: #2d3436;
-        font-weight: 500;
-    }
-
-    .option-btn:hover { 
-        background-color: #f1f2f6;
-        border-color: #6c5ce7;
-        transform: translateY(-2px);
-    }
-
-    /* 7. الألوان عند الإجابة (صح/خطأ) */
-    .option-btn.correct { 
-        background: linear-gradient(135deg, #00b894, #55efc4) !important; 
-        border-color: #00b894 !important; 
-        color: white !important;
-        box-shadow: 0 8px 20px rgba(0, 184, 148, 0.3);
-    }
-
-    .option-btn.wrong { 
-        background: linear-gradient(135deg, #ff7675, #fab1a0) !important; 
-        border-color: #d63031 !important; 
-        color: white !important;
-        box-shadow: 0 8px 20px rgba(214, 48, 49, 0.3);
-    }
-
-    .option-btn .ar-text { 
-        font-size: 14px; 
-        direction: rtl; 
-        opacity: 0.85;
-        background: rgba(0,0,0,0.05);
-        padding: 4px 10px;
-        border-radius: 6px;
-    }
-
-    /* 8. التذييل (Footer) */
+<style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 15px; background: #f0f2f5; direction: ltr; }
+    .container { max-width: 800px; margin: auto; padding-bottom: 100px; }
+    #scoreBox { background: #1a73e8; color: white; padding: 15px; border-radius: 12px; text-align: center; font-size: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    .question-card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .q-text { font-size: 18px; font-weight: 600; color: #1c1e21; margin-bottom: 15px; }
+    .translate-btn { background: #34a853; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; margin-bottom: 10px; }
+    .translation-area { display: none; background: #e8f5e9; padding: 10px; border-radius: 8px; margin-bottom: 15px; direction: rtl; text-align: right; border-right: 4px solid #34a853; }
+    .option { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #dadce0; border-radius: 8px; background: #fff; text-align: left; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; }
+    .option:hover { background: #f8f9fa; border-color: #1a73e8; }
+    .ar-opt { display: none; font-size: 14px; color: #5f6368; margin-top: 4px; direction: rtl; text-align: right; }
+    .correct { background: #d4edda !important; border-color: #28a745 !important; }
+    .wrong { background: #f8d7da !important; border-color: #dc3545 !important; }
+    .result-msg { margin-top: 15px; font-weight: bold; direction: rtl; text-align: right; }
+    h2 { text-align: center; color: #1a73e8; }
     .footer {
-        text-align: center;
-        margin-top: 60px;
-        color: #b2bec3;
-        font-size: 14px;
-        letter-spacing: 1px;
-    }
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+background: linear-gradient(135deg, #0072ff, #00c6ff);
+color: white;
+text-align: center;
+padding: 12px;
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
+}
+.footer a { text-decoration: none; color: white; }
 </style>
 
 </head>
