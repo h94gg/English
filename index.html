@@ -5,58 +5,120 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Full Educational Quiz - 58 Questions</title>
 <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 15px; background: #f0f2f5; direction: ltr; }
-    .container { max-width: 800px; margin: auto; padding-bottom: 100px; }
-    #scoreBox { background: #1a73e8; color: white; padding: 15px; border-radius: 12px; text-align: center; font-size: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
-    .question-card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    .q-text { font-size: 18px; font-weight: 600; color: #1c1e21; margin-bottom: 15px; }
-    .translate-btn { background: #34a853; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; margin-bottom: 10px; }
-    .translation-area { display: none; background: #e8f5e9; padding: 10px; border-radius: 8px; margin-bottom: 15px; direction: rtl; text-align: right; border-right: 4px solid #34a853; }
-    .option { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #dadce0; border-radius: 8px; background: #fff; text-align: left; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; }
-    .option:hover { background: #f8f9fa; border-color: #1a73e8; }
-    .ar-opt { display: none; font-size: 14px; color: #5f6368; margin-top: 4px; direction: rtl; text-align: right; }
-    .correct { background: #d4edda !important; border-color: #28a745 !important; }
-    .wrong { background: #f8d7da !important; border-color: #dc3545 !important; }
-    .result-msg { margin-top: 15px; font-weight: bold; direction: rtl; text-align: right; }
-    h2 { text-align: center; color: #1a73e8; }
-    .footer {
-position: fixed;
-bottom: 0;
-left: 0;
-width: 100%;
-background: linear-gradient(135deg, #0072ff, #00c6ff);
-color: white;
-text-align: center;
-padding: 12px;
-border-top-left-radius: 20px;
-border-top-right-radius: 20px;
-}
-.footer a { text-decoration: none; color: white; }
-    .score-board {
-    position: sticky;
-    top: 15px;
-    /* تدرج لوني احترافي */
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    color: white;
-    padding: 15px 25px;
-    /* حواف دائرية ناعمة */
-    border-radius: 50px; 
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    z-index: 1000;
-    /* ظل ناعم لإعطاء عمق */
-    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
-    margin: 0 auto 30px auto;
-    width: fit-content;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    /* تأثير أنيق عند التمرير */
-    transition: transform 0.3s ease;
-}
+    /* 1. تنسيق الصفحة العام والخلفية */
+    body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+        margin: 0; 
+        padding: 20px; 
+        direction: rtl; 
+        min-height: 100vh;
+    }
 
-.score-board:hover {
-    transform: scale(1.05);
-}
+    /* 2. الحاوية الرئيسية */
+    .container { 
+        max-width: 900px; 
+        margin: auto; 
+        background: rgba(255, 255, 255, 0.9); 
+        padding: 40px; 
+        border-radius: 20px; 
+        box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
+        backdrop-filter: blur(10px);
+    }
+
+    /* 3. إطار النتيجة (السكور) - بشكل بيضاوي وجذاب */
+    .score-board {
+        position: sticky;
+        top: 20px;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        padding: 12px 35px;
+        border-radius: 50px; /* جعل الحواف دائرية بالكامل */
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        z-index: 1000;
+        box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        margin: 0 auto 40px auto;
+        width: fit-content;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease;
+    }
+    .score-board:hover { transform: scale(1.08); }
+
+    /* 4. كونتينر السؤال الواحد */
+    .question-block { 
+        margin-bottom: 25px; 
+        padding: 25px; 
+        border-radius: 18px; 
+        background: #ffffff; 
+        border: 1px solid #f0f0f0;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        direction: ltr; 
+        text-align: left; 
+    }
+    .question-block:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+        border-color: #3498db;
+    }
+
+    /* 5. نصوص الأسئلة والترجمة */
+    .question-text { font-size: 18px; font-weight: 600; color: #2c3e50; margin-bottom: 12px; }
+    
+    .arabic-translation { 
+        color: #7f8c8d; 
+        font-style: italic; 
+        direction: rtl; 
+        text-align: right; 
+        display: block; 
+        font-size: 15px; 
+        border-right: 4px solid #3498db; 
+        padding: 8px 15px;
+        background: #f9f9f9;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    /* 6. الأزرار والخيارات */
+    .options-container { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    
+    .option-btn { 
+        padding: 14px 22px; 
+        border: 1px solid #dee2e6; 
+        border-radius: 12px; 
+        background: #fff; 
+        cursor: pointer; 
+        transition: all 0.2s; 
+        font-size: 16px; 
+        text-align: left; 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+        color: #5d6d7e;
+    }
+
+    .option-btn:hover { 
+        background-color: #f0f7ff;
+        border-color: #3498db;
+        color: #3498db;
+    }
+
+    /* 7. حالات الإجابة الصحيحة والخاطئة */
+    .option-btn.correct { 
+        background-color: #2ecc71 !important; 
+        border-color: #27ae60 !important; 
+        color: white !important;
+        box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+    }
+
+    .option-btn.wrong { 
+        background-color: #e74c3c !important; 
+        border-color: #c0392b !important; 
+        color: white !important;
+        box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+    }
 
 </style>
 </head>
